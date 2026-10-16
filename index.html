@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Tasks - To-Do Task Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo">UI</div>
+      <nav class="side-menu" aria-label="Main navigation">
+        <button title="Home" aria-label="Home">⌂</button>
+        <button title="Dashboard" aria-label="Dashboard">▥</button>
+        <button title="Analytics" aria-label="Analytics">◷</button>
+        <button title="Tasks" aria-label="Tasks">▣</button>
+        <button title="Toggle dark mode" id="theme-btn" aria-label="Toggle dark mode">☾</button>
+        <button title="Settings" aria-label="Settings">⚙</button>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-note">Organize your day, one task at a time.</div>
+        <div class="top-icons">
+          <button title="Focus search" id="focus-search" aria-label="Focus search">⌕</button>
+          <span class="avatar" title="Your profile">U</span>
+        </div>
+      </header>
+
+      <section class="page-heading">
+        <div>
+          <h1>My Tasks</h1>
+          <p class="subtitle">Keep track of what matters today.</p>
+        </div>
+        <button class="create-btn" id="create-btn"><span>＋</span> Create New Task</button>
+      </section>
+
+      <div class="tabs" role="tablist" aria-label="Task filters">
+        <button class="tab active" data-tab="all" role="tab" aria-selected="true">All Tasks</button>
+        <button class="tab" data-tab="Pending" role="tab" aria-selected="false">Pending Tasks</button>
+        <button class="tab" data-tab="Completed" role="tab" aria-selected="false">Completed Tasks</button>
+      </div>
+
+      <section class="toolbar">
+        <div class="filters">
+          <input type="date" id="date-filter" title="Filter by deadline" aria-label="Filter by deadline">
+          <select id="status-filter" aria-label="Filter by status">
+            <option value="all">Choose Status</option>
+            <option value="Pending">Pending</option>
+            <option value="Completed">Completed</option>
+          </select>
+          <button class="filter-btn" id="filter-btn">Filter</button>
+          <button class="reset-btn" id="reset-filter">Reset</button>
+        </div>
+      </section>
+
+      <section class="task-form-panel" id="task-panel" hidden>
+        <h2 id="form-heading">Create New Task</h2>
+        <form id="task-form">
+          <input type="hidden" id="task-id">
+          <label>Task title <input type="text" id="task-title" placeholder="e.g. Finish assignment" maxlength="200" required></label>
+          <label>Description <textarea id="task-description" placeholder="Add a few details..." rows="3"></textarea></label>
+          <label>Priority
+            <select id="task-priority">
+              <option value="Low">Low</option>
+              <option value="Medium" selected>Medium</option>
+              <option value="High">High</option>
+            </select>
+          </label>
+          <label>Deadline <input type="date" id="task-deadline"></label>
+          <div class="form-actions">
+            <button type="submit" class="filter-btn" id="save-btn">Save Task</button>
+            <button type="button" class="reset-btn" id="cancel-btn">Cancel</button>
+          </div>
+        </form>
+      </section>
+
+      <div class="search-row">
+        <input type="search" id="search" placeholder="Search tasks..." aria-label="Search tasks">
+      </div>
+      <div id="message" role="status" aria-live="polite"></div>
+
+      <section class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th><th>Priority</th><th>Status</th><th>Created by</th>
+              <th>Date Assigned</th><th>Due Date</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="task-list">
+            <tr><td colspan="7" class="empty">Loading tasks...</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <footer class="pagination">
+        <label for="rows-per-page">Rows per page:</label>
+        <select id="rows-per-page">
+          <option value="5">5</option><option value="10" selected>10</option><option value="20">20</option>
+        </select>
+        <span id="page-info">0 tasks</span>
+        <button id="prev-page" disabled aria-label="Previous page">‹</button>
+        <button id="next-page" disabled aria-label="Next page">›</button>
+      </footer>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
